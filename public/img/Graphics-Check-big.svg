@@ -1,0 +1,20 @@
+<svg id="Graphics_Check-big" data-name="Graphics/Check-big" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="174" height="176" viewBox="0 0 174 176">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.047" y1="-0.841" x2="1.039" y2="1.821" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#2fd3c1"/>
+      <stop offset="1" stop-color="#0eb6e0"/>
+    </linearGradient>
+    <filter id="Oval" x="0" y="2" width="174" height="174" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-color="#17c0d4" flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="Oval_Copy" data-name="Oval Copy" d="M87,0A87,87,0,1,1,0,87,87,87,0,0,1,87,0Z" fill="none" opacity="0.05"/>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Oval)">
+    <circle id="Oval-2" data-name="Oval" cx="57" cy="57" r="57" transform="translate(30 30)" fill="url(#linear-gradient)"/>
+  </g>
+  <path id="Check" d="M15.789,29.42,4,17.83,0,21.763,15.789,37.286,49.714,3.933,45.714,0Z" transform="translate(62.143 68.357)" fill="#fff"/>
+</svg>

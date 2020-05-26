@@ -6,6 +6,7 @@ const StyledLink = styled(Link)`
 `;
 const Inner = styled.div`
   display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   height: 56px;

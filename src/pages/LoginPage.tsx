@@ -10,9 +10,7 @@ import { spacing } from '../config';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${spacing.page.padding};
-  height: 100%;
-  padding-top: 96px;
+  padding: 96px ${spacing.page.padding} 48px;
 `;
 const StyledLogo = styled(Logo)`
   margin-bottom: 24px;
@@ -24,7 +22,7 @@ const StyledInput = styled(Input)`
   margin-bottom: ${spacing.form.vGap};
 `;
 const StyledButton = styled(Button)`
-  margin-top: 32px;
+  margin: 32px 0;
 `;
 const Footer = styled.div`
   margin-top: auto;

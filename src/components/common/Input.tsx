@@ -4,6 +4,7 @@ import { colorMap } from '../../config';
 
 const Wrapper = styled.div`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   position: relative;
   height: 48px;

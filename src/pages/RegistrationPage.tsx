@@ -9,12 +9,11 @@ import Checkbox from '../components/common/Checkbox';
 import Button from '../components/common/Button';
 import { useHistory } from 'react-router-dom';
 import LocaleSelectorOverlay from '../components/LocaleSelectorOverlay';
+import ScrollToTop from '../components/ScrollToTop';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 100%;
-  padding: ${spacing.page.padding};
+  padding: 96px ${spacing.page.padding} 48px;
 `;
 const StyledInput = styled(Input)`
   margin-bottom: ${spacing.form.vGap};
@@ -28,6 +27,9 @@ const CheckboxWrapper = styled.div`
     white-space: pre-wrap;
   }
   margin-bottom: 24px;
+`;
+const StyledButton = styled(Button)`
+  margin: 32px 0;
 `;
 const Footer = styled.div`
   margin-top: auto;
@@ -61,7 +63,9 @@ const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
     }, 1000);
   };
   return (
-    <Wrapper>
+    <>
+      <ScrollToTop />
+
       {!state.localeSetByUser && (
         <LocaleSelectorOverlay
           locales={locales.supported}
@@ -69,58 +73,60 @@ const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
           onClose={handleOverlayClose}
         />
       )}
-      <BackButton />
-      <PageTitle width={160}>Create a new account</PageTitle>
-      <StyledInput
-        placeholder='Full name'
-        name='name'
-        value={state.name}
-        onChange={handleChange}
-        icon='person'
-      />
-      <StyledInput
-        placeholder='Email address'
-        name='email'
-        value={state.email}
-        onChange={handleChange}
-        icon='email'
-      />
-      <StyledInput
-        type='password'
-        placeholder='Enter your password'
-        name='password'
-        value={state.password}
-        onChange={handleChange}
-        icon='password'
-      />
-      <StyledInput
-        type='password'
-        placeholder='Confirm password'
-        name='passwordCheck'
-        value={state.passwordCheck}
-        onChange={handleChange}
-        icon='password'
-      />
-      <CheckboxWrapper>
-        <Checkbox
-          name='termsAccepted'
-          checked={state.termsAccepted}
+      <Wrapper>
+        <BackButton />
+        <PageTitle width={160}>Create a new account</PageTitle>
+        <StyledInput
+          placeholder='Full name'
+          name='name'
+          value={state.name}
           onChange={handleChange}
+          icon='person'
         />
-        <div>
-          {'Click here to accept our '}
-          <LinkAsText to='/terms-and-conditions'>
-            Terms and Conditions
-          </LinkAsText>
-          {' & '}
-          <LinkAsText to='/privacy-policy'>Data Policy</LinkAsText>{' '}
-        </div>
-      </CheckboxWrapper>
-      <Button onClick={handlePost}>Create account</Button>
-      <Footer>
-        Already have an account? <LinkAsText to='/login'>Sign in</LinkAsText>
-      </Footer>
-    </Wrapper>
+        <StyledInput
+          placeholder='Email address'
+          name='email'
+          value={state.email}
+          onChange={handleChange}
+          icon='email'
+        />
+        <StyledInput
+          type='password'
+          placeholder='Enter your password'
+          name='password'
+          value={state.password}
+          onChange={handleChange}
+          icon='password'
+        />
+        <StyledInput
+          type='password'
+          placeholder='Confirm password'
+          name='passwordCheck'
+          value={state.passwordCheck}
+          onChange={handleChange}
+          icon='password'
+        />
+        <CheckboxWrapper>
+          <Checkbox
+            name='termsAccepted'
+            checked={state.termsAccepted}
+            onChange={handleChange}
+          />
+          <div>
+            {'Click here to accept our '}
+            <LinkAsText to='/terms-and-conditions'>
+              Terms and Conditions
+            </LinkAsText>
+            {' & '}
+            <LinkAsText to='/privacy-policy'>Data Policy</LinkAsText>{' '}
+          </div>
+        </CheckboxWrapper>
+        <StyledButton onClick={handlePost}>Create account</StyledButton>
+        <Footer>
+          Already have an account? <LinkAsText to='/login'>Sign in</LinkAsText>
+        </Footer>
+      </Wrapper>
+    </>
   );
 };
 

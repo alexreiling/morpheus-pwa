@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { Locale } from '../types';
 import { colorMap, spacing } from '../config';
 import Close from './common/Close';
-
-const Wrapper = styled.div``;
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import FocusTrap from 'focus-trap-react';
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100%;
+`;
 const Selector = styled.div`
   position: absolute;
   width: 100%;
@@ -20,6 +28,7 @@ const OpaqueOverlay = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+
   opacity: 0.5;
   background: grey;
   z-index: 3;
@@ -69,30 +78,38 @@ type LocaleSelectorOverlayProps = {
 
 const LocaleSelectorOverlay: React.FC<LocaleSelectorOverlayProps> = (props) => {
   const { locales = [], defaultLocale, onClose } = props;
+  const overlayRef = useRef(null);
   const [selectedLocale, setSelectedLocale] = useState(
     defaultLocale || locales[0]?.id || ''
   );
-  console.log(selectedLocale);
-
+  useEffect(() => {
+    disableBodyScroll(overlayRef.current!);
+    return () => {
+      enableBodyScroll(overlayRef.current!);
+    };
+  }, []);
   return (
-    <Wrapper>
-      <OpaqueOverlay onClick={() => onClose && onClose(selectedLocale)} />
-      <Selector>
-        <SelectorHeader>
-          Language
-          <StyledClose onClick={() => onClose && onClose(selectedLocale)} />
-        </SelectorHeader>
-        {locales.map((l) => (
-          <LocaleItem
-            key={l.id}
-            onClick={() => setSelectedLocale(l.id)}
-            selected={l.id === selectedLocale}
-          >
-            {l.displayName}
-          </LocaleItem>
-        ))}
-      </Selector>
-    </Wrapper>
+    <FocusTrap>
+      <Wrapper ref={overlayRef}>
+        <OpaqueOverlay onClick={() => onClose && onClose(selectedLocale)} />
+        <Selector>
+          <SelectorHeader>
+            Language
+            <StyledClose onClick={() => onClose && onClose(selectedLocale)} />
+          </SelectorHeader>
+          {locales.map((l, idx) => (
+            <LocaleItem
+              key={l.id}
+              tabIndex={idx}
+              onClick={() => setSelectedLocale(l.id)}
+              selected={l.id === selectedLocale}
+            >
+              {l.displayName}
+            </LocaleItem>
+          ))}
+        </Selector>
+      </Wrapper>
+    </FocusTrap>
   );
 };
 

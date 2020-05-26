@@ -10,17 +10,18 @@ import LoginPage from './pages/LoginPage';
 import styled from 'styled-components';
 import PasswordResetPage from './pages/PasswordResetPage';
 import RegistrationPage from './pages/RegistrationPage';
+import ScrollToTop from './components/ScrollToTop';
 const Wrapper = styled.div`
+  position: relative;
   border: 1px solid grey;
-  width: 375px;
-  height: 100vh;
-  margin: auto;
+  height: 100%;
   box-sizing: border-box;
 `;
 function App() {
   return (
     <Wrapper>
       <Router>
+        <ScrollToTop />
         <Switch>
           <Route path='/login'>
             <LoginPage />

@@ -5,12 +5,12 @@ import PageTitle from '../components/common/PageTitle';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import LinkAsText from '../components/common/LinkAsText';
-import { page } from '../config';
+import { spacing } from '../config';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${page.padding};
+  padding: ${spacing.page.padding};
   height: 100%;
   padding-top: 96px;
 `;
@@ -21,7 +21,7 @@ const LinkToPasswordResetPage = styled(LinkAsText)`
   letter-spacing: 0.0125em;
 `;
 const StyledInput = styled(Input)`
-  margin-bottom: 16px;
+  margin-bottom: ${spacing.form.vGap};
 `;
 const StyledButton = styled(Button)`
   margin-top: 32px;

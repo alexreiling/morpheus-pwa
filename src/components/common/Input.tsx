@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
+import { colorMap } from '../../config';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const StyledInput = styled.input`
   height: 100%;
   border-radius: 24px;
   padding: 0 24px 0 56px;
-  background: #f5f5f5;
+  background: ${colorMap.form.bg};
 
   ::placeholder {
     color: #b1b0b5;
@@ -37,6 +38,7 @@ const IconWrapper = styled.div`
 const ICONS = {
   email: '/img/ico_mail.svg',
   password: '/img/ico_password.svg',
+  person: '/img/ico_person.svg',
 };
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   icon?: keyof typeof ICONS;

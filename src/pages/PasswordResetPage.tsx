@@ -1,14 +1,13 @@
 import React, { useState, ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 import PageTitle from '../components/common/PageTitle';
-import { page } from '../config';
+import { spacing } from '../config';
 import BackButton from '../components/common/BackButton';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
-import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div<{ dark?: boolean }>`
-  padding: ${page.padding};
+  padding: ${spacing.page.padding};
   padding-top: 136px;
   height: 100%;
   transition: background 1s ease-in-out;

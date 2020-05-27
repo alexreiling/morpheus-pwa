@@ -59,7 +59,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
   };
   const handlePost = () => {
     setTimeout(() => {
-      push('/login');
+      push('/complete-profile');
     }, 1000);
   };
   return (

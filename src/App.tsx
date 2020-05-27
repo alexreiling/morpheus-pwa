@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import PasswordResetPage from './pages/PasswordResetPage';
 import RegistrationPage from './pages/RegistrationPage';
 import ScrollToTop from './components/ScrollToTop';
+import CompleteProfilePage from './pages/CompleteProfilePage';
 const Wrapper = styled.div`
   position: relative;
   border: 1px solid grey;
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path='/register'>
             <RegistrationPage />
+          </Route>
+          <Route path='/complete-profile'>
+            <CompleteProfilePage />
           </Route>
           <Route
             path='/privacy-policy'

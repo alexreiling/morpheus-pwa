@@ -5,6 +5,7 @@ import { spacing } from '../config';
 import BackButton from '../components/common/BackButton';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
+import Paragraph from '../components/common/Paragraph';
 
 const Wrapper = styled.div<{ dark?: boolean }>`
   padding: ${spacing.page.padding};
@@ -20,8 +21,7 @@ const Wrapper = styled.div<{ dark?: boolean }>`
       text-align: center;
     `}
 `;
-const P = styled.div`
-  line-height: 24px;
+const StyledParagraph = styled(Paragraph)`
   margin-bottom: 24px;
 `;
 const EmailInput = styled(Input)`
@@ -54,9 +54,9 @@ const PasswordResetPage: React.FC<PasswordResetPageProps> = (props) => {
           {' '}
           <BackButton />
           <PageTitle width={128}>Forgot password?</PageTitle>
-          <P>
+          <StyledParagraph>
             Enter your email address to receive a link to reset your password.
-          </P>
+          </StyledParagraph>
           <EmailInput
             placeholder='Email address'
             icon='email'

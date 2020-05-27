@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import Logo from '../components/common/Logo';
 import PageTitle from '../components/common/PageTitle';
@@ -34,14 +34,30 @@ const LinkToRegistration = styled(LinkAsText)``;
 type LoginPageProps = {};
 
 const LoginPage: React.FC<LoginPageProps> = (props) => {
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
   return (
     <Wrapper>
       <StyledLogo />
       <PageTitle width={126} noMarginTop>
         Sign in to morpheus
       </PageTitle>
-      <StyledInput placeholder='Email address' icon='email' />
-      <StyledInput type='password' placeholder='Password' icon='password' />
+      <StyledInput
+        placeholder='Email address'
+        icon='email'
+        name='email'
+        onChange={handleChange}
+      />
+      <StyledInput
+        type='password'
+        placeholder='Password'
+        name='password'
+        icon='password'
+        onChange={handleChange}
+      />
       <LinkToPasswordResetPage to='/reset-password'>
         Forgot Password?
       </LinkToPasswordResetPage>

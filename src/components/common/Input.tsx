@@ -40,6 +40,7 @@ const ICONS = {
   email: '/img/ico_mail.svg',
   password: '/img/ico_password.svg',
   person: '/img/ico_person.svg',
+  misc: '/img/ico_misc.svg',
 };
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   icon?: keyof typeof ICONS;

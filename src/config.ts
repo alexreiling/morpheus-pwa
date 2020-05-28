@@ -4,6 +4,7 @@ export const spacing = {
   page: {
     padding: '40px',
     hPadding: '24px',
+    hPaddingSmall: '20px',
   },
   form: {
     vGap: '16px',

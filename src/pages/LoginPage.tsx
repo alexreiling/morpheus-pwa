@@ -6,6 +6,7 @@ import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import LinkAsText from '../components/common/LinkAsText';
 import { spacing } from '../config';
+import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,9 +36,16 @@ type LoginPageProps = {};
 
 const LoginPage: React.FC<LoginPageProps> = (props) => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const { push } = useHistory();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
+  };
+  const handleLogin = () => {
+    setTimeout(() => {
+      push('/dashboard');
+    }, 1000);
   };
   return (
     <Wrapper>
@@ -61,7 +69,7 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
       <LinkToPasswordResetPage to='/reset-password'>
         Forgot Password?
       </LinkToPasswordResetPage>
-      <StyledButton>Sign in</StyledButton>
+      <StyledButton onClick={handleLogin}>Sign in</StyledButton>
       <Footer>
         Don't have an Account?{' '}
         <LinkToRegistration to='/register'>Register</LinkToRegistration>

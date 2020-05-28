@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10">
+  <g id="ico_bar" transform="translate(-14 -16)">
+    <g id="Text_Icon" data-name="Text &amp; Icon" transform="translate(10 9)">
+      <path id="Shape" d="M1,10A1,1,0,0,1,1,8H15a1,1,0,0,1,0,2ZM1,2A1,1,0,0,1,1,0H15a1,1,0,0,1,0,2Z" transform="translate(4 7)" fill="#0e1823"/>
+    </g>
+  </g>
+</svg>

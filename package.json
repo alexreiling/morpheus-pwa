@@ -13,6 +13,7 @@
     "@types/react-dom": "^16.9.8",
     "body-scroll-lock": "^3.0.2",
     "focus-trap-react": "^6.0.0",
+    "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/moment": "^2.13.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0"
   }

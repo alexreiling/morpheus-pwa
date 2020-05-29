@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../config';
+import { GlobalContext } from '../../App';
 
 const Wrapper = styled.div`
   position: relative;
   height: 64px;
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
 `;
 const BurgerMenuButton = styled.div`
+  cursor: pointer;
   background: url('/img/ico_burger.svg') no-repeat center;
   width: 16px;
   height: 100%;
@@ -17,8 +20,6 @@ const BurgerMenuButton = styled.div`
 `;
 const Title = styled.div`
   position: absolute;
-  left: 0;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,10 +39,12 @@ const ProfileButton = styled.div`
 type HeaderProps = {};
 
 const Header: React.FC<HeaderProps> = (props) => {
+  const { setMenuVisible } = useContext(GlobalContext);
   return (
     <Wrapper>
-      <BurgerMenuButton></BurgerMenuButton>
       <Title>Dashboard</Title>
+
+      <BurgerMenuButton onClick={() => setMenuVisible(true)}></BurgerMenuButton>
       <Notifations />
       <ProfileButton />
     </Wrapper>

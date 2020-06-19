@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { colorMap } from '../config';
 import Logo from './common/Logo';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -33,7 +33,7 @@ const Close = styled.div`
 `;
 const StyledLogo = styled(Logo)`
   position: absolute;
-  margin-left: 24px;
+  margin-left: -8px;
   margin-top: 24px;
 `;
 const MainSection = styled.div`
@@ -62,19 +62,19 @@ type MainMenuProps = {
 const mainRoutes = [
   {
     label: 'Dashboard',
-    route: 'dashboard',
+    route: '/dashboard',
   },
   {
     label: 'Electricity Meter Scan',
-    route: 'e-meter-scan',
+    route: '/e-meter-scan',
   },
   {
     label: 'My Contracts',
-    route: 'contracts',
+    route: '/contracts',
   },
   {
     label: 'Switch',
-    route: 'switch',
+    route: '/switch',
   },
 ];
 const subRoutes = [
@@ -94,7 +94,11 @@ const MainMenu: React.FC<MainMenuProps> = (props) => {
       <Close onClick={onClose} />
       <MainSection>
         {mainRoutes.map((r) => (
-          <Item selected={pathname.includes(r.route)}>{r.label}</Item>
+          <Link to={r.route}>
+            <Item selected={pathname.includes(r.route)} onClick={onClose}>
+              {r.label}
+            </Item>
+          </Link>
         ))}
       </MainSection>
       <SubSection>

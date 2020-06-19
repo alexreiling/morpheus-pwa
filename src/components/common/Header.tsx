@@ -17,6 +17,7 @@ const BurgerMenuButton = styled.div`
   width: 16px;
   height: 100%;
   padding: 0 ${spacing.page.hPaddingSmall};
+  margin-right: auto;
 `;
 const Title = styled.div`
   position: absolute;
@@ -36,17 +37,25 @@ const ProfileButton = styled.div`
   width: 24px;
   height: 24px;
 `;
-type HeaderProps = {};
+type HeaderProps = {
+  title: string;
+  hideUserFunctionality?: boolean;
+};
 
 const Header: React.FC<HeaderProps> = (props) => {
+  const { title, hideUserFunctionality } = props;
   const { setMenuVisible } = useContext(GlobalContext);
   return (
     <Wrapper>
-      <Title>Dashboard</Title>
+      <Title>{title}</Title>
 
       <BurgerMenuButton onClick={() => setMenuVisible(true)}></BurgerMenuButton>
-      <Notifations />
-      <ProfileButton />
+      {!hideUserFunctionality && (
+        <>
+          <Notifations />
+          <ProfileButton />
+        </>
+      )}
     </Wrapper>
   );
 };

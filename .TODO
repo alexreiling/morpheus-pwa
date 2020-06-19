@@ -1,0 +1,5 @@
+- make user data available
+=> auto fill CreateContractPage with user data
+- camera button in form inputs
+- form validation
+- modularize form

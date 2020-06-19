@@ -4,7 +4,9 @@ import { Link, LinkProps } from 'react-router-dom';
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
-const Inner = styled.div`
+export const ButtonStyles = css`
+  border: none;
+  font: inherit;
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -21,6 +23,9 @@ const Inner = styled.div`
     rgba(14, 182, 224, 1) 100%
   );
   box-shadow: 0px 2px 20px 0px rgba(23, 192, 212, 0.38);
+`;
+const Inner = styled.div`
+  ${ButtonStyles}
 `;
 
 type ButtonProps = {

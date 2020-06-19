@@ -14,6 +14,7 @@ import ScrollToTop from './components/ScrollToTop';
 import CompleteProfilePage from './pages/CompleteProfilePage';
 import DashboardPage from './pages/DashboardPage';
 import MainMenu from './components/MainMenu';
+import AddContractPage from './pages/AddContractPage';
 const Wrapper = styled.div`
   position: relative;
   border: 1px solid grey;
@@ -27,7 +28,7 @@ export const GlobalContext = createContext<GlobalContextType>({
   setMenuVisible: () => {},
 });
 function App() {
-  const [menuVisible, setMenuVisible] = useState(true);
+  const [menuVisible, setMenuVisible] = useState(false);
   const globalContext: GlobalContextType = {
     setMenuVisible,
   };
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route path='/reset-password'>
               <PasswordResetPage />
+            </Route>
+            <Route path='/add-contract'>
+              <AddContractPage />
             </Route>
             <Route path='/register'>
               <RegistrationPage />

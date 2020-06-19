@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   padding: 24px 16px;
@@ -10,7 +11,6 @@ const Header = styled.div`
 `;
 const Item = styled.div`
   display: flex;
-  cursor: pointer;
   font-weight: 500;
   font-size: 12px;
   &:not(:first-child) {
@@ -43,12 +43,15 @@ const NextSteps: React.FC<NextStepsProps> = (props) => {
   return (
     <Wrapper>
       <Header>Next steps</Header>
-      {steps.map((step) => (
-        <Item>
-          <Bullet />
-          <div>{step.text}</div>
-        </Item>
-      ))}
+      {steps.map((step) => {
+        const View = (
+          <Item>
+            <Bullet />
+            <div>{step.text}</div>
+          </Item>
+        );
+        return step.path ? <Link to={step.path}>{View}</Link> : View;
+      })}
     </Wrapper>
   );
 };

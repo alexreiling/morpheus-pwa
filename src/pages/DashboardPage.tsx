@@ -24,7 +24,7 @@ const DashboardPage: React.FC<DashboardPageProps> = (props) => {
   const itemFeed = [];
   return (
     <Wrapper>
-      <Header />
+      <Header title='Dashboard' />
       <Hero />
       {/* {itemFeed.map((item) => (
         <Card></Card>
@@ -43,7 +43,7 @@ const DashboardPage: React.FC<DashboardPageProps> = (props) => {
           <NextSteps
             data={{
               steps: [
-                { text: 'Add your current contract' },
+                { text: 'Add your current contract', path: 'add-contract' },
                 { text: 'Take a picture of your electricity meter' },
                 { text: 'Change to an eco-friendly electricity provider' },
               ],

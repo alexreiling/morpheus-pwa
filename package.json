@@ -13,6 +13,7 @@
     "@types/react-dom": "^16.9.8",
     "body-scroll-lock": "^3.0.2",
     "focus-trap-react": "^6.0.0",
+    "formik": "^2.1.4",
     "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

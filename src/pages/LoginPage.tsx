@@ -7,6 +7,7 @@ import Button from '../components/common/Button';
 import LinkAsText from '../components/common/LinkAsText';
 import { spacing } from '../config';
 import { useHistory } from 'react-router-dom';
+import { LoginData } from '../types';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,9 +33,12 @@ const Footer = styled.div`
 `;
 const LinkToRegistration = styled(LinkAsText)``;
 
-type LoginPageProps = {};
+type LoginPageProps = {
+  onLogin: (loginData: LoginData) => any;
+};
 
 const LoginPage: React.FC<LoginPageProps> = (props) => {
+  const { onLogin } = props;
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const { push } = useHistory();
 
@@ -44,7 +48,9 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
   };
   const handleLogin = () => {
     setTimeout(() => {
-      push('/dashboard');
+      onLogin(credentials)
+        .then(() => push('/dashboard'))
+        .catch((error: string) => alert(error));
     }, 1000);
   };
   return (

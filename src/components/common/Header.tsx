@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../config';
-import { GlobalContext } from '../../App';
+import UIContext from '../../contexts/UIContext';
 
 const Wrapper = styled.div`
   position: relative;
@@ -44,12 +44,14 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const { title, hideUserFunctionality } = props;
-  const { setMenuVisible } = useContext(GlobalContext);
+  const { setMenuVisible } = useContext(UIContext);
   return (
     <Wrapper>
       <Title>{title}</Title>
 
-      <BurgerMenuButton onClick={() => setMenuVisible(true)}></BurgerMenuButton>
+      <BurgerMenuButton
+        onClick={() => setMenuVisible!(true)}
+      ></BurgerMenuButton>
       {!hideUserFunctionality && (
         <>
           <Notifations />

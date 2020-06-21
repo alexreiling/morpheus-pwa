@@ -43,14 +43,20 @@ const NextSteps: React.FC<NextStepsProps> = (props) => {
   return (
     <Wrapper>
       <Header>Next steps</Header>
-      {steps.map((step) => {
+      {steps.map((step, index) => {
         const View = (
-          <Item>
+          <Item key={index}>
             <Bullet />
             <div>{step.text}</div>
           </Item>
         );
-        return step.path ? <Link to={step.path}>{View}</Link> : View;
+        return step.path ? (
+          <Link to={step.path} key={index}>
+            {View}
+          </Link>
+        ) : (
+          View
+        );
       })}
     </Wrapper>
   );

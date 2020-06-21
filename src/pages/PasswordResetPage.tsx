@@ -51,7 +51,6 @@ const PasswordResetPage: React.FC<PasswordResetPageProps> = (props) => {
     <Wrapper dark={resetConfirmed}>
       {!resetConfirmed ? (
         <>
-          {' '}
           <BackButton />
           <PageTitle width={128}>Forgot password?</PageTitle>
           <StyledParagraph>

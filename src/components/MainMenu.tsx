@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { colorMap } from '../config';
 import Logo from './common/Logo';
 import { useLocation, Link } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -82,30 +83,27 @@ const subRoutes = [
     label: 'About us',
   },
   { label: 'Change password' },
-  { label: 'Logout' },
 ];
 const MainMenu: React.FC<MainMenuProps> = (props) => {
   const { onClose } = props;
   const { pathname } = useLocation();
-
+  const { logout } = useContext(UserContext);
   return (
     <Wrapper>
       <StyledLogo />
       <Close onClick={onClose} />
       <MainSection>
-        {mainRoutes.map((r) => (
-          <Link to={r.route}>
-            <Item selected={pathname.includes(r.route)} onClick={onClose}>
-              {r.label}
-            </Item>
+        {mainRoutes.map((r, i) => (
+          <Link to={r.route} key={i}>
+            <Item selected={pathname.includes(r.route)}>{r.label}</Item>
           </Link>
         ))}
       </MainSection>
       <SubSection>
-        {' '}
-        {subRoutes.map((r) => (
-          <Item>{r.label}</Item>
+        {subRoutes.map((r, i) => (
+          <Item key={i}>{r.label}</Item>
         ))}
+        <Item onClick={logout}>Logout</Item>
       </SubSection>
     </Wrapper>
   );

@@ -10,6 +10,7 @@ import Button from '../components/common/Button';
 import { useHistory } from 'react-router-dom';
 import LocaleSelectorOverlay from '../components/LocaleSelectorOverlay';
 import ScrollToTop from '../components/ScrollToTop';
+import routes, { protectedRoutes } from '../routes';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,7 +60,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
   };
   const handlePost = () => {
     setTimeout(() => {
-      push('/complete-profile');
+      push(routes.completeProfile.path);
     }, 1000);
   };
   return (

@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useContext } from 'react';
 import styled from 'styled-components';
 import Logo from '../components/common/Logo';
 import PageTitle from '../components/common/PageTitle';
@@ -7,8 +7,7 @@ import Button from '../components/common/Button';
 import LinkAsText from '../components/common/LinkAsText';
 import { spacing } from '../config';
 import { useHistory } from 'react-router-dom';
-import { LoginData } from '../types';
-
+import UserContext from '../contexts/UserContext';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,12 +32,10 @@ const Footer = styled.div`
 `;
 const LinkToRegistration = styled(LinkAsText)``;
 
-type LoginPageProps = {
-  onLogin: (loginData: LoginData) => any;
-};
+type LoginPageProps = {};
 
 const LoginPage: React.FC<LoginPageProps> = (props) => {
-  const { onLogin } = props;
+  const { signIn } = useContext(UserContext);
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const { push } = useHistory();
 
@@ -48,7 +45,7 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
   };
   const handleLogin = () => {
     setTimeout(() => {
-      onLogin(credentials)
+      signIn!(credentials)
         .then(() => push('/dashboard'))
         .catch((error: string) => alert(error));
     }, 1000);

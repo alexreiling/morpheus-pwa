@@ -5,6 +5,8 @@ import AddContractPage from './pages/AddContractPage';
 import DashboardPage from './pages/DashboardPage';
 import CompleteProfilePage from './pages/CompleteProfilePage';
 import RegistrationPage from './pages/RegistrationPage';
+import AccountPage from './pages/AccountPage';
+import LoginPage from './pages/LoginPage';
 
 type Route = {
   path: string;
@@ -12,6 +14,10 @@ type Route = {
 };
 
 export const publicRoutes = {
+  login: {
+    path: '/login',
+    component: LoginPage,
+  },
   register: {
     path: '/register',
     component: RegistrationPage,
@@ -27,6 +33,10 @@ export const publicRoutes = {
       return null;
     },
   },
+  completeProfile: {
+    path: '/complete-profile',
+    component: CompleteProfilePage,
+  },
   termsAndConditions: {
     path: '/terms-and-conditions',
     component: () => {
@@ -41,13 +51,14 @@ export const protectedRoutes = {
     path: '/add-contract',
     component: AddContractPage,
   },
-  completeProfile: {
-    path: '/complete-profile',
-    component: CompleteProfilePage,
-  },
+
   dashboard: {
     path: '/dashboard',
     component: DashboardPage,
+  },
+  account: {
+    path: '/account',
+    component: AccountPage,
   },
 };
 const routes = { ...publicRoutes, ...protectedRoutes };

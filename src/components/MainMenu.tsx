@@ -4,6 +4,8 @@ import { colorMap } from '../config';
 import Logo from './common/Logo';
 import { useLocation, Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
+import routes from '../routes';
+import UIContext from '../contexts/UIContext';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -60,10 +62,11 @@ const Item = styled.div<{ selected?: boolean }>`
 type MainMenuProps = {
   onClose?: () => any;
 };
+// TODO: replace hard-coded paths with route definition object
 const mainRoutes = [
   {
     label: 'Dashboard',
-    route: '/dashboard',
+    route: routes.dashboard.path,
   },
   {
     label: 'Electricity Meter Scan',
@@ -81,29 +84,34 @@ const mainRoutes = [
 const subRoutes = [
   {
     label: 'About us',
+    route: '/about-us',
   },
-  { label: 'Change password' },
+  { label: 'My Account', route: routes.account.path },
 ];
 const MainMenu: React.FC<MainMenuProps> = (props) => {
-  const { onClose } = props;
   const { pathname } = useLocation();
-  const { logout } = useContext(UserContext);
+  const { signOut } = useContext(UserContext);
+  const { setMenuVisible } = useContext(UIContext);
+  // TODO: fix undefined context
+  const handleClose = () => setMenuVisible!(false);
   return (
     <Wrapper>
       <StyledLogo />
-      <Close onClick={onClose} />
+      <Close onClick={handleClose} />
       <MainSection>
         {mainRoutes.map((r, i) => (
-          <Link to={r.route} key={i}>
+          <Link to={r.route} key={i} onClick={handleClose}>
             <Item selected={pathname.includes(r.route)}>{r.label}</Item>
           </Link>
         ))}
       </MainSection>
       <SubSection>
         {subRoutes.map((r, i) => (
-          <Item key={i}>{r.label}</Item>
+          <Link to={r.route} key={i} onClick={handleClose}>
+            <Item selected={pathname.includes(r.route)}>{r.label}</Item>
+          </Link>
         ))}
-        <Item onClick={logout}>Logout</Item>
+        <Item onClick={signOut}>Logout</Item>
       </SubSection>
     </Wrapper>
   );

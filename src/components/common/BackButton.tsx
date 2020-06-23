@@ -18,7 +18,7 @@ const BackButton: React.FC<BackButtonProps> = (props) => {
   const { preventDefault, onClick, ...rest } = props;
   const { goBack } = useHistory();
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
-    !!preventDefault && goBack();
+    !preventDefault && goBack();
     onClick && onClick(e);
   };
   return <Wrapper onClick={handleClick} {...rest} />;

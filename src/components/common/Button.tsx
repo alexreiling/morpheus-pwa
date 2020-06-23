@@ -24,13 +24,23 @@ export const ButtonStyles = css`
   );
   box-shadow: 0px 2px 20px 0px rgba(23, 192, 212, 0.38);
 `;
-const Inner = styled.div`
+const Inner = styled.div<{ cancelStyle?: boolean }>`
   ${ButtonStyles}
+  ${(p) =>
+    p.cancelStyle &&
+    css`
+      background: white;
+      border: 2px solid red;
+      color: red;
+      font-weight: 500;
+      box-shadow: none;
+    `}
 `;
 
 type ButtonProps = {
   children?: string;
   linkTo?: string;
+  cancelStyle?: boolean;
 } & ButtonHTMLAttributes<HTMLDivElement>;
 
 const Button: React.FC<ButtonProps> = (props) => {

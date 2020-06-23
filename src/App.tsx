@@ -1,6 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import ScrollToTop from './components/ScrollToTop';
 import MainMenu from './components/MainMenu';
@@ -11,7 +16,8 @@ import { UserContextProvider } from './contexts/UserContext';
 const Wrapper = styled.div`
   position: relative;
   border: 1px solid grey;
-  height: 100%;
+  height: 100vh;
+  overflow: auto;
   box-sizing: border-box;
 `;
 
@@ -50,14 +56,12 @@ function App() {
                   />
                 );
               })}
+              <Route exact path='/'>
+                <Redirect to='/login' />
+              </Route>
               <Route>
                 <div>Not found</div>
               </Route>
-              {/* {!user && (
-                <Route path='/'>
-                  <Redirect to='/login' />
-                </Route>
-              )} */}
             </Switch>
           </UserContextProvider>
         </UIContext.Provider>

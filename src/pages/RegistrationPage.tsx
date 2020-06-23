@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import LocaleSelectorOverlay from '../components/LocaleSelectorOverlay';
 import ScrollToTop from '../components/ScrollToTop';
 import routes, { protectedRoutes } from '../routes';
+import api from '../api';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,7 +42,8 @@ type RegistrationPageProps = {};
 
 const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
   const [state, setState] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     passwordCheck: '',
@@ -59,9 +61,23 @@ const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
     setState({ ...state, [name]: v });
   };
   const handlePost = () => {
-    setTimeout(() => {
-      push(routes.completeProfile.path);
-    }, 1000);
+    const {
+      password,
+      passwordCheck,
+      firstName,
+      lastName,
+      email,
+      termsAccepted,
+    } = state;
+    if (password !== passwordCheck) return;
+    if (!termsAccepted) return;
+    api.auth
+      .register({ email, password, lastName, firstName })
+      .then(() => {
+        //push(routes.completeProfile.path);
+        push(routes.login.path);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <>
@@ -78,9 +94,16 @@ const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
         <BackButton />
         <PageTitle width={160}>Create a new account</PageTitle>
         <StyledInput
-          placeholder='Full name'
-          name='name'
-          value={state.name}
+          placeholder='First Name'
+          name='firstName'
+          value={state.firstName}
+          onChange={handleChange}
+          icon='person'
+        />
+        <StyledInput
+          placeholder='Last Name'
+          name='lastName'
+          value={state.lastName}
           onChange={handleChange}
           icon='person'
         />

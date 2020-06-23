@@ -6,7 +6,8 @@ const Wrapper = styled.div`
   width: calc(100% + 2 * ${spacing.page.hPaddingSmall});
   height: auto;
   padding-top: 66%;
-  background: url('/img/hero_dummy.png');
+  background: url('/img/hero_dummy.png') center no-repeat;
+  background-size: contain;
   margin: 0 -${spacing.page.hPaddingSmall};
 `;
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { colorMap } from '../config';
 import Logo from './common/Logo';
@@ -6,6 +6,7 @@ import { useLocation, Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 import routes from '../routes';
 import UIContext from '../contexts/UIContext';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   z-index: 1;
   padding: 0 0 48px 32px;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   left: 0;
   top: 0;
@@ -35,12 +36,17 @@ const Close = styled.div`
   box-shadow: 0px 11px 32px 0px rgba(0, 0, 0, 0.15);
 `;
 const StyledLogo = styled(Logo)`
-  position: absolute;
   margin-left: -8px;
   margin-top: 24px;
 `;
+const Overflow = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding-top: 40px;
+  height: 100%;
+`;
 const MainSection = styled.div`
-  margin-top: 192px;
   > :not(:first-child) {
     margin-top: 32px;
   }
@@ -92,27 +98,37 @@ const MainMenu: React.FC<MainMenuProps> = (props) => {
   const { pathname } = useLocation();
   const { signOut } = useContext(UserContext);
   const { setMenuVisible } = useContext(UIContext);
+  const overflowRef = useRef(null);
+
   // TODO: fix undefined context
   const handleClose = () => setMenuVisible!(false);
+  useEffect(() => {
+    disableBodyScroll(overflowRef.current!);
+    return () => {
+      enableBodyScroll(overflowRef.current!);
+    };
+  }, []);
   return (
     <Wrapper>
       <StyledLogo />
       <Close onClick={handleClose} />
-      <MainSection>
-        {mainRoutes.map((r, i) => (
-          <Link to={r.route} key={i} onClick={handleClose}>
-            <Item selected={pathname.includes(r.route)}>{r.label}</Item>
-          </Link>
-        ))}
-      </MainSection>
-      <SubSection>
-        {subRoutes.map((r, i) => (
-          <Link to={r.route} key={i} onClick={handleClose}>
-            <Item selected={pathname.includes(r.route)}>{r.label}</Item>
-          </Link>
-        ))}
-        <Item onClick={signOut}>Logout</Item>
-      </SubSection>
+      <Overflow ref={overflowRef}>
+        <MainSection>
+          {mainRoutes.map((r, i) => (
+            <Link to={r.route} key={i} onClick={handleClose}>
+              <Item selected={pathname.includes(r.route)}>{r.label}</Item>
+            </Link>
+          ))}
+        </MainSection>
+        <SubSection>
+          {subRoutes.map((r, i) => (
+            <Link to={r.route} key={i} onClick={handleClose}>
+              <Item selected={pathname.includes(r.route)}>{r.label}</Item>
+            </Link>
+          ))}
+          <Item onClick={signOut}>Logout</Item>
+        </SubSection>
+      </Overflow>
     </Wrapper>
   );
 };

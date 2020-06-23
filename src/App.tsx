@@ -15,9 +15,7 @@ import UIContext from './contexts/UIContext';
 import { UserContextProvider } from './contexts/UserContext';
 const Wrapper = styled.div`
   position: relative;
-  border: 1px solid grey;
   height: 100vh;
-  overflow: auto;
   box-sizing: border-box;
 `;
 
@@ -38,8 +36,9 @@ function App() {
         <UIContext.Provider value={uiContext}>
           {/* TODO: this is baaad */}
           <UserContextProvider resetUI={() => setMenuVisible(false)}>
-            {menuVisible && <MainMenu onClose={() => setMenuVisible(false)} />}
             <ScrollToTop />
+
+            {menuVisible && <MainMenu onClose={() => setMenuVisible(false)} />}
             <Switch>
               {Object.keys(publicRoutes).map((key) => {
                 //@ts-ignore

@@ -53,36 +53,47 @@ const createSummary = (data: any, filterFields: string[] = []) => {
 const AccountPage: React.FC<AccountPageProps> = (props) => {
   const { user, updateUserData } = useContext(UserContext);
   const [editedSection, setEditedSection] = useState<any>(undefined);
+  const personal = user?.personal;
   const sections = [
     {
       label: 'Personal Data',
       fields: {
-        firstName: { label: 'First Name', value: user?.firstName },
-        lastName: { label: 'Last Name', value: user?.lastName },
-        dateOfBirth: { label: 'Date of Birth', value: user!.dateOfBirth },
-        address: { label: 'Address', value: stringifyAddress(user?.address) },
+        firstName: { label: 'First Name', value: personal?.firstName },
+        lastName: { label: 'Last Name', value: personal?.lastName },
+        dateOfBirth: { label: 'Date of Birth', value: personal?.dateOfBirth },
+        address: {
+          label: 'Address',
+          value: stringifyAddress(personal?.address),
+        },
         street: {
           label: 'Street',
-          value: user?.address?.street,
+          value: personal?.address?.street,
           widthRatio: 0.75,
         },
-        nr: { label: 'Nr.', value: user?.address?.nr, widthRatio: 0.25 },
+        nr: { label: 'Nr.', value: personal?.address?.nr, widthRatio: 0.25 },
         zipCode: {
           label: 'Zip Code',
-          value: user?.address?.zipCode,
+          value: personal?.address?.zipCode,
           widthRatio: 0.4,
         },
 
-        city: { label: 'City', value: user?.address?.city, widthRatio: 0.6 },
-        country: { label: 'Country', value: user?.address?.country },
+        city: {
+          label: 'City',
+          value: personal?.address?.city,
+          widthRatio: 0.6,
+        },
+        country: { label: 'Country', value: personal?.address?.country },
       },
       summaryFilter: ['street', 'nr', 'city', 'zipCode', 'country'],
       formFilter: ['address'],
       handleSubmit: async (data: any) => {
         const { street, nr, zipCode, city, country, ...rest } = data;
         return updateUserData!({
-          ...rest,
-          address: { street, nr, zipCode, city, country },
+          ...user!,
+          personal: {
+            ...rest,
+            address: { street, nr, zipCode, city, country },
+          },
         });
       },
     },

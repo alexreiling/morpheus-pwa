@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../config';
 import UIContext from '../../contexts/UIContext';
+import { useLocation, useHistory } from 'react-router-dom';
+import routes from '../../routes';
 
 const Wrapper = styled.div`
   position: relative;
@@ -36,6 +38,7 @@ const ProfileButton = styled.div`
   background: url('/img/profile-pic_dummy.png') no-repeat center;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 `;
 type HeaderProps = {
   title: string;
@@ -43,6 +46,7 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = (props) => {
+  const { push } = useHistory();
   const { title, hideUserFunctionality } = props;
   const { setMenuVisible } = useContext(UIContext);
   return (
@@ -55,7 +59,7 @@ const Header: React.FC<HeaderProps> = (props) => {
       {!hideUserFunctionality && (
         <>
           <Notifations />
-          <ProfileButton />
+          <ProfileButton onClick={() => push(routes.account.path)} />
         </>
       )}
     </Wrapper>

@@ -15,34 +15,35 @@ type AddContractPageProps = {};
 
 const AddContractPage: React.FC<AddContractPageProps> = (props) => {
   const { user } = useContext(UserContext);
+  const personal = user?.personal;
   const fields = {
     firstName: {
       label: 'First Name',
-      initValue: user?.firstName,
+      initValue: personal?.firstName,
     },
     lastName: {
       label: 'Surname',
-      initValue: user?.lastName,
+      initValue: personal?.lastName,
     },
     street: {
       label: 'Street',
       widthRatio: 0.75,
-      initValue: user?.address?.street,
+      initValue: personal?.address?.street,
     },
     nr: {
       label: 'No.',
       widthRatio: 0.25,
-      initValue: user?.address?.nr,
+      initValue: personal?.address?.nr,
     },
     zipCode: {
       label: 'ZIP',
       widthRatio: 0.25,
-      initValue: user?.address?.zipCode.toString(),
+      initValue: personal?.address?.zipCode?.toString(),
     },
     city: {
       label: 'City',
       widthRatio: 0.75,
-      initValue: user?.address?.city,
+      initValue: personal?.address?.city,
     },
   };
   return (

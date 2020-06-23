@@ -19,11 +19,18 @@ export interface AddressData {
   city: string;
   country: string;
 }
-export interface User {
-  username: string;
+export interface PersonalData {
   email: string;
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
-  address: AddressData;
+  dateOfBirth?: string;
+  address?: AddressData;
+}
+export interface UserFlags {
+  profileCompletionPending?: boolean;
+}
+export interface User {
+  username: string;
+  personal: PersonalData;
+  userFlags: UserFlags;
 }

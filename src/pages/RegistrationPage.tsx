@@ -72,12 +72,20 @@ const RegistrationPage: React.FC<RegistrationPageProps> = (props) => {
     if (password !== passwordCheck) return;
     if (!termsAccepted) return;
     api.auth
-      .register({ email, password, lastName, firstName })
+      .register({
+        email,
+        password,
+        lastName,
+        firstName,
+      })
       .then(() => {
         //push(routes.completeProfile.path);
         push(routes.login.path);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err);
+        console.log(err);
+      });
   };
   return (
     <>
